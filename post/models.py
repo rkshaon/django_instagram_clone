@@ -7,7 +7,7 @@ import uuid
 
 def use_directory_path(instance, filename):
     # this file will be uploaded to MEDIA_ROOT/user(id)/filename
-    return 'user_{0}/{1}'.fomart(instance.user.id, filename)
+    return 'user_{0}/{1}'.format(instance.user.id, filename)
 
 class Tag(models.Model):
     """docstring for Tag."""
@@ -15,6 +15,7 @@ class Tag(models.Model):
     slug = models.SlugField(null=False, unique=True)
 
     class Meta:
+        verbose_name = 'Tag'
         verbose_name_plural = 'Tags'
 
     def get_absolute_url(self):
@@ -42,7 +43,7 @@ class Post(models.Model):
         return reverse('postdetails', args=[str(self.id)])
 
     def __str__(self):
-        return self.posted
+        return str(self.posted)
 
 class Follow(models.Model):
     """docstring for Follow."""
