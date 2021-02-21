@@ -12,6 +12,9 @@ class Profile(models.Model):
     created = models.DateField(auto_now_add=True)
     picture = models.ImageField(upload_to='profile_picture', blank=True, null=True, verbose_name='Picture')
 
+    def __str__(self):
+        return self.first_name + " " + self.last_name
+
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
