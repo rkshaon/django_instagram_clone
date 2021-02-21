@@ -13,7 +13,7 @@ class Profile(models.Model):
     picture = models.ImageField(upload_to='profile_picture', blank=True, null=True, verbose_name='Picture')
 
     def __str__(self):
-        return self.first_name + " " + self.last_name
+        return self.user
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

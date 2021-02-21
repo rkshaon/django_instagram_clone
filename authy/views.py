@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.template import loader
+from django.http import HttpResponse
+
 from authy.forms import SignupForm
 from django.contrib.auth.models import User
 
@@ -17,4 +20,5 @@ def Signup(request):
     context = {
         'form': form,
     }
-    return render(request, 'signup.html', context)
+    template = loader.get_template('signup.html')
+    return HttpResponse(template.render(context, request))
