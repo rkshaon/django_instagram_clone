@@ -7,7 +7,7 @@
     <div class="card">
       <div class="card-image">
         <figure class="image is-4by3">
-          <a href="{% url 'post_details' post_item.id %}"><img src="{{ post_item.picture.url }}" alt="Placeholder image"></a>
+          <a href="{{ post_item.get_absolute_url }}"><img src="{{ post_item.picture.url }}" alt="Placeholder image"></a>
         </figure>
       </div>
       <div class="card-content">

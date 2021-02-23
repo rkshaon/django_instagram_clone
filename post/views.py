@@ -64,3 +64,15 @@ def post_details(request, post_id):
     }
     template = loader.get_template('post_details.html')
     return HttpResponse(template.render(context, request))
+
+@login_required
+def tags(request, tag_slug):
+    tag = get_object_or_404(Tag, slug=tag_slug)
+    posts = Post.objects.filter(tags=tag).order_by('-posted')
+
+    context = {
+        'posts': posts,
+        'tag': tag,
+    }
+    template = loader.get_template('tag.html')
+    return HttpResponse(template.render(context, request))
