@@ -5,48 +5,35 @@
   <div class="column is-half is-offset-one-quarter">
     <div class="card">
       <div class="card-content">
-        <form method="post" action="" role="form">
+        <form method="post" action="" role="form" enctype="multipart/form-data">
           {% csrf_token %}
-          <h3 class="title is-3">Create an account</h3>
+          <h3 class="title is-1">New Post</h3>
           <div class="field">
             <p class="control has-icons-left">
-              <label class="label is-medium">Username</label>
-              {{ form.username }}
+              <label class="label is-medium">Change your picture</label>
+              {{ form.picture }}
               <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
             </p>
           </div>
           <div class="field">
             <p class="control has-icons-left">
-              <label class="label is-medium">Email</label>
-              {{ form.email }}
+              <label class="label is-medium">Caption</label>
+              {{ form.caption }}
               <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
             </p>
           </div>
           <div class="field">
             <p class="control has-icons-left">
-              <label class="label is-medium">Password</label>
-              {{ form.password }}
+              <label class="label is-medium">Tags (add tags, separeted by commas)</label>
+              {{ form.tags }}
               <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
             </p>
-          </div>
-          <div class="field">
-            <p class="control has-icons-left">
-              <label class="label is-medium">Confirm password</label>
-              {{ form.confirm_password }}
-              <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
-            </p>
-          </div>
-          <div class="row">
-            <div class="col s12">
-              <span style="color: red; font-weight: bold;">{{ form.errors }}</span>
-            </div>
           </div>
           <div class="field">
             <p class="control">
-              <button type="submit" name="action" class="button is-success"><span class="material-icons">create</span>Create</button>
+              <button type="submit" name="action" class="button is-success"><span class="material-icons">create</span>Post</button>
             </p>
           </div>
-          <a href="{% url 'login' %}" class="button is-info"><span class="material-icons" style="padding-right: 10px;">add_box</span>Already have an account</a>
         </form>
       </div>
     </div>
