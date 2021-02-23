@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.template import loader
 from django.http import HttpResponse
@@ -53,4 +53,14 @@ def new_post(request):
         'form': form,
     }
     template = loader.get_template('new_post.html')
+    return HttpResponse(template.render(context, request))
+
+@login_required
+def post_details(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    context = {
+        'post': post,
+    }
+    template = loader.get_template('post_details.html')
     return HttpResponse(template.render(context, request))
