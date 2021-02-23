@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="columns is-mobile has-text-centered">
+  <div class="column is-half is-offset-one-quarter">
+    <div class="card">
+      <div class="card-content">
+        <form method="post" action="" role="form">
+          {% csrf_token %}
+          <h3 class="title is-3">Create an account</h3>
+          <div class="field">
+            <p class="control has-icons-left">
+              <label class="label is-medium">Username</label>
+              {{ form.username }}
+              <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+              <label class="label is-medium">Email</label>
+              {{ form.email }}
+              <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+              <label class="label is-medium">Password</label>
+              {{ form.password }}
+              <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+              <label class="label is-medium">Confirm password</label>
+              {{ form.confirm_password }}
+              <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
+            </p>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <span style="color: red; font-weight: bold;">{{ form.errors }}</span>
+            </div>
+          </div>
+          <div class="field">
+            <p class="control">
+              <button type="submit" name="action" class="button is-success"><span class="material-icons">create</span>Create</button>
+            </p>
+          </div>
+          <a href="{% url 'login' %}" class="button is-info"><span class="material-icons" style="padding-right: 10px;">add_box</span>Already have an account</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
