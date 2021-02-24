@@ -1,6 +1,6 @@
 from django.urls import path
 
-from post.views import index, new_post, post_details, tags, like
+from post.views import index, new_post, post_details, tags, like, favorite
 
 urlpatterns = [
     path('', index, name='index'),
@@ -8,4 +8,5 @@ urlpatterns = [
     path('<uuid:post_id>', post_details, name='post_details'),
     path('tag/<slug:tag_slug>', tags, name='tags'),
     path('<uuid:post_id>/like', like, name='post_like'),
+    path('<uuid:post_id>/favorite', favorite, name='post_favorite'),
 ]

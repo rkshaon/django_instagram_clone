@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from post.models import Post, Stream, Tag, Likes
+from authy.models import Profile
 from post.forms import NewPostForm
 
 @login_required
@@ -59,9 +60,17 @@ def new_post(request):
 @login_required
 def post_details(request, post_id):
     post = get_object_or_404(Post, id=post_id)
+    favorited = False
+
+    if request.user.is_authenticated:
+        profile = Profile.objects.get(user=request.user)
+
+        if profile.favorites.filter(id=post_id).exists():
+            favorited = True
 
     context = {
         'post': post,
+        'favorited': favorited,
     }
     template = loader.get_template('post_details.html')
     return HttpResponse(template.render(context, request))
@@ -94,4 +103,17 @@ def like(request, post_id):
 
     post.likes = current_likes
     post.save()
+    return HttpResponseRedirect(reverse('post_details', args=[post_id]))
+
+@login_required
+def favorite(request, post_id):
+    user = request.user
+    post = Post.objects.get(id=post_id)
+    profile = Profile.objects.get(user=user)
+
+    if profile.favorites.filter(id=post_id).exists():
+        profile.favorites.remove(post)
+    else:
+        profile.favorites.add(post)
+
     return HttpResponseRedirect(reverse('post_details', args=[post_id]))
