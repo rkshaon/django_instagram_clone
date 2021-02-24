@@ -65,4 +65,9 @@ class Stream(models.Model):
             stream = Stream(post=post, user=follower.follower, date=post.posted, following=user)
             stream.save()
 
+class Likes(models.Model):
+    """docstring for Likes."""
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_like')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_likes')
+
 post_save.connect(Stream.add_post, sender=Post)

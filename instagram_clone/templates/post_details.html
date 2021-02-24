@@ -19,13 +19,19 @@
                   <div class="media-content">
                     <p class="title is-4">John Smith</p>
                     <p class="subtitle is-6">@{{ post.user.username }}</p>
+                    {{ post.caption }}
+                    <p>{% for tag in post.tags.all %}<a href="{{ tag.get_absolute_url }}">#{{ tag }}</a> {% endfor %}</p>
+                    <br>
+                    <time datetime="2016-1-1">{{ post.posted }}</time>
                   </div>
-                </div>
-                <div class="content">
-                  {{ post.caption }}
-                  <p>{% for tag in post.tags.all %}<a href="{{ tag.get_absolute_url }}">#{{ tag }}</a> {% endfor %}</p>
-                  <br>
-                  <time datetime="2016-1-1">{{ post.posted }}</time>
+                  <div class="media-right">
+                    <a href="{% url 'post_like' post.id %}"><i class="material-icons">favorite</i></a>
+                    <p>{{ post.likes }} Likes</p>
+                  </div>
+                  <div class="media-right">
+                    <a href="#"><i class="material-icons">save_alt</i></a>
+                    <p>Save</p>
+                  </div>
                 </div>
               </div>
             </div>
