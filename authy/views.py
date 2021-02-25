@@ -1,9 +1,15 @@
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse
+from django.core.paginator import Paginator
+from django.urls import resolve
 
 from authy.forms import SignupForm
 from django.contrib.auth.models import User
+
+def UserProfile(request, username):
+    user = get_object_or_404(User, username=username)
+    pass
 
 def Signup(request):
     if request.method == 'POST':
