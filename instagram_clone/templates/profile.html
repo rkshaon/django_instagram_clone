@@ -11,9 +11,15 @@
     <div class="content">
       <h1 style="font-weight: bold;" class="title is-1">{% if profile.first_name %}{{ profile.first_name }} {{ profile.last_name }}{% endif %}</h1>
       <a href="#"><h2 class="subtitle is-3">@{{ profile.user }}</h2></a>
+      {% if user.is_authenticated and user != profile.user %}
       <div class="media-right">
-        <button class="button is-success">Follow</button>
+        {% if follow_status == True %}
+        <a class="button is-danger" href="{% url 'follow' profile.user 0 %}">Unfollow</a>
+        {% else %}
+        <a class="button is-success" href="{% url 'follow' profile.user 1 %}">Follow</a>
+        {% endif %}
       </div>
+      {% endif %}
     </div>
     <nav class="level is-mobile">
       <div class="level-item has-text-centered">

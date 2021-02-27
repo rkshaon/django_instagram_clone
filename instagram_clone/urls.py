@@ -18,12 +18,13 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from authy.views import UserProfile
+from authy.views import user_profile, follow
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('authy.urls')),
     path('post/', include('post.urls')),
-    path('<username>/', UserProfile, name='profile'),
-    path('<username>/saved', UserProfile, name='profile_favorite'),
+    path('<username>/', user_profile, name='profile'),
+    path('<username>/saved', user_profile, name='profile_favorite'),
+    path('<username>/follow/<option>', follow, name='follow'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
