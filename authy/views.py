@@ -7,7 +7,7 @@ from django.urls import resolve, reverse
 from django.db import transaction
 
 from django.contrib.auth.models import User
-from authy.forms import SignupForm
+from authy.forms import SignupForm, EditProfileForm
 from authy.models import Profile
 from post.models import Post, Follow, Stream
 
@@ -47,6 +47,14 @@ def user_profile(request, username):
     template = loader.get_template('profile.html')
     return HttpResponse(template.render(context, request))
 
+@login_required
+def edit_profile(request):
+    form = EditProfileForm()
+    context = {
+        'form': form,
+    }
+    template = loader.get_template('edit_profile.html')
+    return HttpResponse(template.render(context, request))
 
 def sign_up(request):
     if request.method == 'POST':

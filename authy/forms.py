@@ -1,6 +1,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
+
 from django.contrib.auth.models import User
+from authy.models import Profile
 
 def ForbiddenUsers(value):
     forbidden_users = ['admin', 'css', 'js', 'authenticate', 'login', 'logout', 'administrator', 'root',
@@ -45,3 +47,16 @@ class SignupForm(forms.ModelForm):
         if password != confirm_password:
             self._errors['password'] = self.error_class(['Passwords do not match. Try again'])
         return self.cleaned_data
+
+class EditProfileForm(forms.ModelForm):
+    """docstring for EditProfileForm."""
+    picture = forms.ImageField(required=False)
+    first_name = forms.CharField(widget=forms.TextInput(), max_length=50, required=False)
+    last_name = forms.CharField(widget=forms.TextInput(), max_length=50, required=False)
+    location = forms.CharField(widget=forms.TextInput(), max_length=25, required=False)
+    url = forms.URLField(widget=forms.TextInput(), max_length=60, required=False)
+    profile_info = forms.CharField(widget=forms.TextInput(), max_length=260, required=False)
+
+    class Meta:
+        model = Profile
+        fields = ('picture', 'first_name', 'last_name', 'location', 'url', 'profile_info')

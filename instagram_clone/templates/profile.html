@@ -43,7 +43,7 @@
     </nav>
     <p class="subtitle is-5">{% if profile.profile_info %}{{ profile.profile_info }}{% endif %}</p>
     {% if user.is_authenticated and user == profile.user %}
-    <button class="button">Edit profile</button>
+    <a class="button" href="{% url 'edit_profile' %}">Edit profile</a>
     {% endif %}
   </div>
 </article>
