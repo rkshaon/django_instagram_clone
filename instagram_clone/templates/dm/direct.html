@@ -63,7 +63,13 @@
       {% csrf_token %}
       <article class="media">
         <figure class="media-left">
-          <p class="image is-64x64"><img src="https://bulma.io/images/placeholders/128x128.png"></p>
+          <p class="image is-64x64">
+            {% if request.user.profile.picture %}
+            <img src="{{ request.user.profile.picture.url }}">
+            {% else %}
+            <img src="https://bulma.io/images/placeholders/128x128.png">
+            {% endif %}
+          </p>
         </figure>
         <div class="media-content">
           <input type="hidden" name="to_user" value="{{ active_dm }}">
