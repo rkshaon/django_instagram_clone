@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'authy',
     'post',
     'comment',
+    'direct_message',
 ]
 
 MIDDLEWARE = [
