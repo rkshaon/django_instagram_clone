@@ -32,12 +32,15 @@ class Message(models.Model):
 
     def get_messages(user):
         users = []
-        messages = Message.object.filter(user=user).values('recipient').annotate(last=Max('date')).order_by('-last')
+        messages = Message.objects.filter(user=user).values('recipient').annotate(last=Max('date')).order_by('-last')
 
         for message in messages:
-            user.append({
+            users.append({
                 'user': User.objects.get(pk=message['recipient']),
                 'last': message['last'],
-                'unread': Message.object.filter(user=user, recipient__pk=message['recipient'], is_read=False).count(),
+                'unread': Message.objects.filter(user=user, recipient__pk=message['recipient'], is_read=False).count(),
                 })
         return users
+
+    def __str__(self):
+        return self.body
