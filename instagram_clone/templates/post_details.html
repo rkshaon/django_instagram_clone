@@ -48,41 +48,59 @@
             </div>
             <br>
             <div class="card-content">
+              {% for comment in comments %}
               <article class="media">
                 <figure class="media-left">
                   <p class="image is-64x64">
-                    <img src="https://bulma.io/images/placeholders/128x128.png">
+                    {% if comment.user.profile.picture %}
+                      <img src="{{ comment.user.profile.picture.url }}" alt="Profile picture">
+                    {% else %}
+                      <img src="https://bulma.io/images/placeholders/128x128.png">
+                    {% endif %}
                   </p>
                 </figure>
                 <div class="media-content">
                   <div class="content">
                     <p>
-                      <strong>Barbara Middleton</strong>
+                      {% if comment.user.profile.first_name %}
+                      <strong>{{ comment.user.profile.first_name }} {{ comment.user.profile.last_name }}</strong>
+                      <small>@{{ comment.user.username }}</small>
+                      {% else %}
+                      <strong>Unknown</strong>
+                      {% endif %}
                       <br>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros lacus, nec ultricies elit blandit non. Suspendisse pellentesque mauris sit amet dolor blandit rutrum. Nunc in tempus turpis.
+                      {{ comment.body }}
                       <br>
-                      <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
+                      <strong><i><small>{{ comment.date }}</small></i></strong>
                     </p>
                   </div>
                 </div>
               </article>
+              {% endfor %}
               <article class="media">
                 <figure class="media-left">
                   <p class="image is-64x64">
-                    <img src="https://bulma.io/images/placeholders/128x128.png">
+                    {% if request.user.profile.picture %}
+                      <img src="{{ request.user.profile.picture.url }}">
+                    {% else %}
+                      <img src="https://bulma.io/images/placeholders/128x128.png">
+                    {% endif %}
                   </p>
                 </figure>
                 <div class="media-content">
-                  <div class="field">
-                    <p class="control">
-                      <textarea class="textarea" placeholder="Add a comment..."></textarea>
-                    </p>
-                  </div>
-                  <div class="field">
-                    <p class="control">
-                      <button class="button">Post comment</button>
-                    </p>
-                  </div>
+                  <form class="" action="" method="post" role="form">
+                    {% csrf_token %}
+                    <div class="field">
+                      <p class="control">
+                        {{ form.body }}
+                      </p>
+                    </div>
+                    <div class="field">
+                      <p class="control">
+                        <button class="button">Post comment</button>
+                      </p>
+                    </div>
+                  </form>
                 </div>
               </article>
             </div>

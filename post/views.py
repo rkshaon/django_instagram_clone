@@ -6,7 +6,9 @@ from django.urls import reverse
 
 from post.models import Post, Stream, Tag, Likes
 from authy.models import Profile
+from comment.models import Comment
 from post.forms import NewPostForm
+from comment.forms import CommentForm
 
 @login_required
 def index(request):
@@ -60,17 +62,37 @@ def new_post(request):
 @login_required
 def post_details(request, post_id):
     post = get_object_or_404(Post, id=post_id)
+    user = request.user
     favorited = False
 
+    # comment
+    comments = Comment.objects.filter(post=post).order_by('date')
+
+    # comment form
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.user = user
+            comment.save()
+            return HttpResponseRedirect(reverse('post_details', args=[post_id]))
+    else:
+        form = CommentForm()
+
+    # favorite conditions
     if request.user.is_authenticated:
         profile = Profile.objects.get(user=request.user)
 
+        # favorite color
         if profile.favorites.filter(id=post_id).exists():
             favorited = True
 
     context = {
         'post': post,
         'favorited': favorited,
+        'form': form,
+        'comments': comments,
     }
     template = loader.get_template('post_details.html')
     return HttpResponse(template.render(context, request))
