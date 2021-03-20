@@ -28,7 +28,7 @@
           <a class="navbar-item"><span class="material-icons">notifications</span>Notification</a>
           <a class="navbar-item"><span class="material-icons">inbox</span>Inbox</a>
           <a class="navbar-item" href="{% url 'new_post' %}"><span class="material-icons" style="color: green;">perm_media</span><strong>New Post</strong></a>
-          <a class="navbar-item" href="{% url 'profile' request.user %}"><span class="material-icons">face</span>Profile</a>
+          <a class="navbar-item" href="{% url 'profile' request.user %}"><span class="material-icons">face</span>{{request.user}}</a>
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">Settings</a>
             <div class="navbar-dropdown">

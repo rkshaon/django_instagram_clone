@@ -23,7 +23,7 @@
           </div>
           <div class="media-content">
             {% if post_item.user.profile.first_name %}
-            <p class="title is-4">{{ post_item.user.profile.first_name }}</p>
+            <a href="{% url 'profile' post_item.user %}"><p class="title is-4">{{ post_item.user.profile.first_name }}</p></a>
             {% else %}
             <p class="title is-4">Unknown</p>
             {% endif %}

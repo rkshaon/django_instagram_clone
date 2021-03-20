@@ -79,7 +79,7 @@ def sign_up(request):
             email = form.cleaned_data.get('email')
             password = form.cleaned_data.get('password')
             User.objects.create_user(username=username, email=email, password=password)
-            return redirect('index')
+            return redirect('edit_profile')
     else:
         form = SignupForm()
 
@@ -104,7 +104,7 @@ def follow(request, username, option):
 
             with transaction.atomic():
                 for post in posts:
-                    stream = Stream(post=post, user=user, date=post.posted, following=follwoing)
+                    stream = Stream(post=post, user=user, date=post.posted, following=following)
                     stream.save()
 
         return HttpResponseRedirect(reverse('profile', args=[username]))
