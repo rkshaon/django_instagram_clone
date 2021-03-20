@@ -8,7 +8,7 @@
       <h1 class="title is-2">Messages</h1>
       <ul style="overflow-y: scroll; height: 500px" class="menu-list">
         {% for message in messages %}
-        <a class="{% if active_direct == message.user.username %}is-active{% endif %}" href="">
+        <a class="{% if active_direct == message.user.username %}is-active{% endif %}" href="{% url 'direct_message' message.user.username %}">
           <div class="box">
             <article class="media">
               <div class="media-left">
@@ -48,7 +48,10 @@
           </div>
           <div class="media-content">
             <div class="content">
-              <p><strong>{{ direct.sender.profile.first_name }} {{ direct.sender.profile.last_name }}</strong> <small>@{{ direct.sender.username }}</small> on: <strong><small>{{ direct.date|date:'N d G:i'}}</small></strong></p>
+              <p>
+                <strong>{{ direct.sender.profile.first_name }} {{ direct.sender.profile.last_name }}</strong>
+                <small>@{{ direct.sender.username }}</small> on: <strong><small>{{ direct.date|date:'N d G:i'}}</small></strong>
+              </p>
               {{ direct.body }}
             </div>
           </div>
@@ -56,16 +59,16 @@
       </div>
       {% endfor %}
     </div>
-    <form role="form" method="POST" action="">
+    <form role="form" method="POST" action="{% url 'send_dm' %}">
       {% csrf_token %}
       <article class="media">
         <figure class="media-left">
           <p class="image is-64x64"><img src="https://bulma.io/images/placeholders/128x128.png"></p>
         </figure>
         <div class="media-content">
-          <input type="hidden" name="to_user" value="{{ active_direct }}">
+          <input type="hidden" name="to_user" value="{{ active_dm }}">
           <div class="field">
-            <p class="control"><textarea class="textarea" name="body" placeholder="Add a comment..."></textarea></p>
+            <p class="control"><textarea autofocus class="textarea" name="body" placeholder="Add a comment..."></textarea></p>
           </div>
           <nav class="level">
             <div class="level-left">
