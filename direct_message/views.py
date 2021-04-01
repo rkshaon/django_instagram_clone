@@ -58,6 +58,21 @@ def direct_message(request, username):
     return HttpResponse(template.render(context, request))
 
 @login_required
+def new_conversation(request, username):
+	from_user = request.user
+	body = ''
+
+	try:
+		to_user = User.objects.get(username=username)
+	except Exception as e:
+		return redirect('user_search')
+
+	if from_user != to_user:
+		Message.send_message(from_user, to_user, body)
+
+	return redirect('inbox')
+
+@login_required
 def send_dm(request):
     from_user = request.user
     to_user_username = request.POST.get('to_user')
