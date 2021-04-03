@@ -26,7 +26,13 @@
           <a href="{% url 'index' %}" class="navbar-item"><span class="material-icons">home</span>Home</a>
           <a class="navbar-item"><span class="material-icons">explore</span>Explore</a>
           <a class="navbar-item"><span class="material-icons">notifications</span>Notification</a>
-          <a class="navbar-item" href="{% url 'inbox' %}"><span class="material-icons">inbox</span>Inbox</a>
+          <a class="navbar-item" href="{% url 'inbox' %}">
+            <i class="material-icons">inbox</i>
+            Inbox
+            {% if directs_count %}
+            <span class="badge">{{ directs_count }}</span>
+            {% endif %}
+          </a>
           <a class="navbar-item" href="{% url 'new_post' %}"><span class="material-icons" style="color: green;">perm_media</span><strong>New Post</strong></a>
           <a class="navbar-item" href="{% url 'profile' request.user %}"><span class="material-icons">face</span>{{request.user}}</a>
           <div class="navbar-item has-dropdown is-hoverable">
