@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% load static %}
-{% load humanize %}
 
 {% block content %}
 
@@ -10,7 +9,7 @@
     {% for notification in notifications %}
       {% if notification.notification_type == 2 %}
         <div class="notification">
-          <a href="{% url 'delete-notification' notification.id %}" class="delete"></a>
+          <a href="" class="delete"></a>
           <article class="media">
             <figure class="media-left">
               <p class="image is-64x64">
@@ -27,7 +26,7 @@
               <br>
               Commented:
               <p>{{ notification.text_preview }}</p>
-              <strong><small>{{ notification.date|naturaltime }}</small></strong>
+              <strong><small>{{ notification.date }}</small></strong>
             </div>
           </div>
           <div class="media-right">
@@ -40,7 +39,7 @@
     {% endif %}
     {% if notification.notification_type == 3 %}
       <div class="notification">
-        <a href="{% url 'delete-notification' notification.id %}" class="delete"></a>
+        <a href="" class="delete"></a>
         <article class="media">
           <figure class="media-left">
             <p class="image is-64x64">
@@ -56,7 +55,7 @@
                 <strong>{{ notification.sender.profile.first_name }} {{ notification.sender.profile.last_name }}</strong> <small>@{{ notification.sender.username }}</small>
                 <br>
                 <p><i class="material-icons">person_add</i> Followed you!</p>
-                <strong><small>{{ notification.date|naturaltime }}</small></strong>
+                <strong><small>{{ notification.date }}</small></strong>
               </div>
             </div>
           </article>
@@ -65,7 +64,7 @@
       <!-- FOR LIKES --->
       {% if notification.notification_type == 1 %}
         <div class="notification">
-          <a href="{% url 'delete-notification' notification.id %}" class="delete"></a>
+          <a href="" class="delete"></a>
           <article class="media">
             <figure class="media-left">
               <p class="image is-64x64">
@@ -81,7 +80,7 @@
                 <strong>{{ notification.sender.profile.first_name }} {{ notification.sender.profile.last_name }}</strong> <small>@{{ notification.sender.username }}</small>
                 <br>
                 <p><i class="material-icons">thumb_up</i> Liked your post</p>
-                <strong><small>{{ notification.date|naturaltime }}</small></strong>
+                <strong><small>{{ notification.date }}</small></strong>
               </div>
             </div>
             <div class="media-right">
