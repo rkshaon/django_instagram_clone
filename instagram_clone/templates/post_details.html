@@ -13,12 +13,16 @@
                 <div class="media">
                   <div class="media-left">
                     <figure class="image is-48x48">
+                      {% if post.user.profile.picture %}
+                      <img src="{{ post.user.profile.picture.url }}" alt="Placeholder image">
+                      {% else %}
                       <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                      {% endif %}
                     </figure>
                   </div>
                   <div class="media-content">
-                    {% if post_item.user.profile.first_name %}
-                    <a href=""><p class="title is-4">{{ post_item.user.profile.first_name }}</p></a>
+                    {% if post.user.profile.first_name %}
+                    <a href=""><p class="title is-4">{{ post.user.profile.first_name }} {{ post.user.profile.last_name }}</p></a>
                     {% else %}
                     <a href=""><p class="title is-4">Unknown</p></a>
                     {% endif %}
