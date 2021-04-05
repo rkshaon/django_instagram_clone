@@ -25,7 +25,12 @@
         <div class="navbar-start">
           <a href="{% url 'index' %}" class="navbar-item"><span class="material-icons">home</span>Home</a>
           <a class="navbar-item"><span class="material-icons">explore</span>Explore</a>
-          <a href="{% url 'show_notification' %}" class="navbar-item"><span class="material-icons">notifications</span>Notification</a>
+          <a href="{% url 'show_notification' %}" class="navbar-item"><span class="material-icons">notifications</span>
+            Notification
+            {% if count_notifications %}
+            <span class="badge">{{ count_notifications }}</span>
+            {% endif %}
+          </a>
           <a class="navbar-item" href="{% url 'inbox' %}">
             <i class="material-icons">inbox</i>
             Inbox
