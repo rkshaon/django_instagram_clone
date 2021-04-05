@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
 <div class="columns is-mobile is-centered">
   <div class="column">
@@ -75,7 +76,7 @@
                       <br>
                       {{ comment.body }}
                       <br>
-                      <strong><i><small>{{ comment.date }}</small></i></strong>
+                      <strong><i><small>{{ comment.date|naturaltime }}</small></i></strong>
                     </p>
                   </div>
                 </div>
