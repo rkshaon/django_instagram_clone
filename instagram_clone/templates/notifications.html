@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load humanize %}
 
 {% block content %}
-
 <div class="columns is-mobile is-centered">
   <div class="column is-half">
     {% for notification in notifications %}
+      <!-- FOR COMMENT -->
       {% if notification.notification_type == 2 %}
         <div class="notification">
           <a href="" class="delete"></a>
@@ -37,6 +38,8 @@
         </article>
       </div>
     {% endif %}
+    <!-- FOR COMMENT -->
+    <!-- FOR FOLLOW -->
     {% if notification.notification_type == 3 %}
       <div class="notification">
         <a href="" class="delete"></a>
@@ -55,12 +58,13 @@
                 <strong>{{ notification.sender.profile.first_name }} {{ notification.sender.profile.last_name }}</strong> <small>@{{ notification.sender.username }}</small>
                 <br>
                 <p><i class="material-icons">person_add</i> Followed you!</p>
-                <strong><small>{{ notification.date }}</small></strong>
+                <strong><small>{{ notification.date|naturaltime }}</small></strong>
               </div>
             </div>
           </article>
         </div>
       {% endif %}
+      <!-- FOR FOLLOW -->
       <!-- FOR LIKES --->
       {% if notification.notification_type == 1 %}
         <div class="notification">
@@ -80,7 +84,7 @@
                 <strong>{{ notification.sender.profile.first_name }} {{ notification.sender.profile.last_name }}</strong> <small>@{{ notification.sender.username }}</small>
                 <br>
                 <p><i class="material-icons">thumb_up</i> Liked your post</p>
-                <strong><small>{{ notification.date }}</small></strong>
+                <strong><small>{{ notification.date|naturaltime }}</small></strong>
               </div>
             </div>
             <div class="media-right">
