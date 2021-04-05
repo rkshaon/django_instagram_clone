@@ -57,6 +57,17 @@ class Follow(models.Model):
         sender = follow.follower
         following = follow.following
 
+        notify = Notification(sender=sender, user=following, notification_type=3)
+        notify.save()
+
+    def user_unfollow(sender, instance, *args, **kwargs):
+        follow = instance
+        sender = follow.follower
+        following = follow.following
+
+        notify = Notification.objects.filter(sender= sender, user=following, notification_type=3)
+        notify.delete()
+
 
     def __str__(self):
         return str(self.follower) + ' follwoing ' + str(self.following)
@@ -103,3 +114,7 @@ post_save.connect(Stream.add_post, sender=Post)
 # Likes
 post_save.connect(Likes.user_like_post, sender=Likes)
 post_delete.connect(Likes.user_unlike_post, sender=Likes)
+
+# Follow
+post_save.connect(Follow.user_follow, sender=Follow)
+post_delete.connect(Follow.user_unfollow, sender=Follow)
