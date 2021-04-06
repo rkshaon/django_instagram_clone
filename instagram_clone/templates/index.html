@@ -1,6 +1,38 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<div style="overflow-x: scroll;" class="columns">
+  {% for story in stories %}
+    <div style="padding-right: 9px;">
+      <a name="{{ story.id }}" class="showModal">
+        <figure class="image is-128x128">
+          <img class="is-rounded" src="{{ story.following.profile.picture.url }}">
+        </figure>
+        <div class="media-content has-text-centered">
+          <p class="title is-6">@{{ story.following.username }}</p>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</div>
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p id="storiestitle">Stories</p>
+      <button id="closeModal" class="delete" aria-label="close"></button>
+    </header>
+    <!-- Slideshow container -->
+    <section class="modal-card-body">
+      <div class="slideshow-container">
+        <div class="" id="jsondata"></div>
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+    </section>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
 <div class="columns is-mobile is-centered">
   <div class="column is-half">
     {% for post_item in post_items %}
