@@ -6,7 +6,8 @@ from notifications.models import Notification
 
 def show_notification(request):
     user = request.user
-    notifications = Notification.objects.filter(user=user, is_seen=False).order_by('-date')
+    notifications = Notification.objects.filter(user=user).order_by('-date')
+    Notification.objects.filter(user=user, is_seen=False).update(is_seen=True)
 
     template = loader.get_template('notifications.html')
 
