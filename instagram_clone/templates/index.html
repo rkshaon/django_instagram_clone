@@ -38,9 +38,19 @@
     {% for post_item in post_items %}
     <div class="card">
       <div class="card-image">
+        {% if post_item.content.first.file.name|slice:"-3:" == 'jpg' or post_item.content.first.file.name|slice:"-3:" == 'png'%}
         <figure class="image is-4by3">
-          <a href="{{ post_item.get_absolute_url }}"><img src="{{ post_item.picture.url }}" alt="Placeholder image"></a>
+          <a href="{{ post_item.get_absolute_url }}">
+            <img src="{{ post_item.content.first.file.url }}" alt="post-image">
+          </a>
         </figure>
+        {% else %}
+        <a href="{{ post_item.get_absolute_url }}">
+          <video width="1080" controls="controls" preload="metadata">
+            <source src="{{ post_item.content.first.file.url }}#t=0.5" type="video/mp4">
+          </video>
+        </a>
+        {% endif %}
       </div>
       <div class="card-content">
         <div class="media">

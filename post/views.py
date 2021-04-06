@@ -4,7 +4,7 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
-from post.models import Post, Stream, Tag, Likes
+from post.models import Post, Stream, Tag, Likes, PostFileContent
 from authy.models import Profile
 from comment.models import Comment
 from post.forms import NewPostForm
@@ -29,14 +29,15 @@ def index(request):
 
 @login_required
 def new_post(request):
-    user = request.user.id
-    tags_obj = []
+    user = request.user
+    tags_objs = []
+    files_objs = []
 
     if request.method == 'POST':
         form = NewPostForm(request.POST, request.FILES)
 
         if form.is_valid():
-            picture = form.cleaned_data.get('picture')
+            files = request.FILES.getlist('content')
             caption = form.cleaned_data.get('caption')
             tags_form = form.cleaned_data.get('tags')
 
@@ -44,10 +45,16 @@ def new_post(request):
 
             for tag in tags_list:
                 t, created = Tag.objects.get_or_create(title=tag)
-                tags_obj.append(t)
+                tags_objs.append(t)
 
-            p, created = Post.objects.get_or_create(picture=picture, caption=caption, user_id=user)
-            p.tags.set(tags_obj)
+            for file in files:
+                file_instance = PostFileContent(file=file, user=user)
+                file_instance.save()
+                files_objs.append(file_instance)
+
+            p, created = Post.objects.get_or_create(caption=caption, user=user)
+            p.tags.set(tags_objs)
+            p.content.set(files_objs)
             p.save()
             return redirect('index')
     else:

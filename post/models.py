@@ -39,7 +39,7 @@ class PostFileContent(models.Model):
 class Post(models.Model):
     """docstring for Post."""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    content = models.ManyToManyField(PostFileContent, related_name='contents')    
+    content = models.ManyToManyField(PostFileContent, related_name='contents')
     caption = models.TextField(max_length=1500, verbose_name='Caption')
     posted = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField(Tag, related_name='tags')
