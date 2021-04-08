@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'comment',
     'direct_message',
     'notifications',
+    'stories',
 ]
 
 MIDDLEWARE = [
