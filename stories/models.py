@@ -25,7 +25,7 @@ class StoryStream(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.following.username) + ' - ' + str(self.date)
+        return str(self.following.username) + ' following ' + str(self.user) + ' - ' + str(self.date)
 
     def add_post(sender, instance, *args, **kwargs):
         new_story = instance
@@ -38,7 +38,8 @@ class StoryStream(models.Model):
             except StoryStream.DoesNotExist:
                 s = StoryStream.objects.create(user=follower.follower, date=new_story.posted, following=user)
 
-            s.story.save(new_story)
+            s.story.add(new_story)
             s.save()
 
+# story stream
 post_save.connect(StoryStream.add_post, sender=Story)

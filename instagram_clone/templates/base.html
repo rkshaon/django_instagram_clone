@@ -44,6 +44,7 @@
             {% endif %}
           </a>
           <a class="navbar-item" href="{% url 'new_post' %}"><span class="material-icons" style="color: green;">perm_media</span><strong>New Post</strong></a>
+          <a class="navbar-item" href="{% url 'new_story' %}"><span class="material-icons" style="color: green;">photo_filter</span><strong>New Story</strong></a>
           <a class="navbar-item" href="{% url 'profile' request.user %}"><span class="material-icons">face</span>{{request.user}}</a>
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">Settings</a>

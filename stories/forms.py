@@ -5,8 +5,8 @@ from stories.models import Story
 
 class NewStoryForm(forms.ModelForm):
     """docstring for NewStoryForm."""
-    content = models.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=True)
-    caption = models.CharField(widget=forms.Textarea(attrs={'class': 'input is-medium'}), required=True)
+    content = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=True)
+    caption = forms.CharField(widget=forms.Textarea(attrs={'class': 'input is-medium'}), required=True)
 
     class Meta:
         model = Story

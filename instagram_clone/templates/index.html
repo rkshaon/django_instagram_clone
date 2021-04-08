@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<!-- story start -->
 <div style="overflow-x: scroll;" class="columns">
   {% for story in stories %}
     <div style="padding-right: 9px;">
@@ -15,11 +16,12 @@
     </div>
   {% endfor %}
 </div>
+<!-- story end -->
 <div class="modal">
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p id="storiestitle">Stories</p>
+      <p id="storiestitle">{{ story }}Stories</p>
       <button id="closeModal" class="delete" aria-label="close"></button>
     </header>
     <!-- Slideshow container -->

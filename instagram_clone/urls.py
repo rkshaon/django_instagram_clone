@@ -25,6 +25,7 @@ urlpatterns = [
     path('user/', include('authy.urls')),
     path('', include('post.urls')),
     path('dm/', include('direct_message.urls')),
+    path('stories/', include('stories.urls')),
     path('notifications/', include('notifications.urls')),
     path('<username>/', user_profile, name='profile'),
     path('<username>/saved', user_profile, name='profile_favorite'),

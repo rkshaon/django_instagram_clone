@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.https import JsonResponse
+from django.http import JsonResponse
 from datetime import datetime, timedelta
 
 from stories.models import Story, StoryStream
@@ -29,3 +29,12 @@ def new_story(request):
     }
 
     return render(request, 'new_story.html', context)
+
+@login_required
+def show_media(request, stream_id):
+    stories = StoryStream.objects.get(id=stream_id)
+    media_st = stories.story.all().values()
+
+    stories_list = list(media_st)
+
+    return JsonResponse(stories_list, safe=False)

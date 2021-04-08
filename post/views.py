@@ -7,6 +7,7 @@ from django.urls import reverse
 from post.models import Post, Stream, Tag, Likes, PostFileContent
 from authy.models import Profile
 from comment.models import Comment
+from stories.models import Story, StoryStream
 from post.forms import NewPostForm
 from comment.forms import CommentForm
 
@@ -14,6 +15,7 @@ from comment.forms import CommentForm
 def index(request):
     user = request.user
     posts = Stream.objects.filter(user=user)
+    stories = StoryStream.objects.filter(user=user)
     group_ids = []
 
     for post in posts:
@@ -23,6 +25,7 @@ def index(request):
 
     context = {
         'post_items': post_items,
+        'stories': stories,
     }
     template = loader.get_template('index.html')
     return HttpResponse(template.render(context, request))
