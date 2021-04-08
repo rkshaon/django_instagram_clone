@@ -61,9 +61,19 @@
       {% for post in posts %}
       <div class="column is-one-quarter">
         <div class="box">
+          {% if post.content.first.file.name|slice:"-3:" == 'jpg' or post.content.first.file.name|slice:"-3:" == 'png' %}
           <figure class="image is-256x256">
-            <a href="{{ post.get_absolute_url }}"><img src="{{ post.picture.url }}" alt="Image"></a>
+            <a href="{{ post.get_absolute_url }}">
+              <img src="{{ post.content.first.file.url }}" alt="Image">
+            </a>
           </figure>
+          {% else %}
+          <a href="{{ post.get_absolute_url }}">
+            <video width="640" controls="controls" preload="metadata">
+              <source src="{{ post.content.file.url }}#t=0.5" type="video/mp4">
+            </video>
+          </a>
+          {% endif %}
         </div>
       </div>
       {% empty %}
