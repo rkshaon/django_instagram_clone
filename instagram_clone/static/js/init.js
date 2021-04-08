@@ -8,6 +8,7 @@ $(document).ready(function(){
       url: 'http://127.0.0.1:8000/stories/showmedia/'+ storyid,
 			dataType: 'json',
       success: function(data){
+        console.log(data);
         $.each(data,function(i,v){
           if (v.content.slice(v.content.length - 3) === 'mp4'){
             var div_slides_html = '<div class="mySlides fade"><video width="640" controls="controls" preload="metadata"><source src="/media/'+ v.content + '#t=0.5" type="video/mp4"></video></div>'
