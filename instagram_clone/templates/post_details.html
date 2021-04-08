@@ -6,7 +6,7 @@
   <div class="column">
     <div class="card">
       <div class="card-image">
-        <div class="slideshow-container">
+        <div class="slideshow-container" onload="showSlides(0)">
           {% for cont in post.content.all %}
             <!-- Full-width images with number and caption text -->
             <div class="mySlides fade">
@@ -17,7 +17,7 @@
                   </a>
                 </figure>
               {% else %}
-              hello
+              do not get the value
                 <a href="{{ cont.get_absolute_url }}">
                   <video width="640" controls="controls" preload="metadata">
                     <source src="{{ cont.file.url }}#t=0.5" type="video/mp4">
@@ -135,5 +135,4 @@
             </div>
           </div>
         </div>
-</div>
 {% endblock %}
