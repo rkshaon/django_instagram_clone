@@ -1,7 +1,7 @@
 # Django Instagram Clone
 
 ## Overview
-This project describes my expertise in Django. This is a pure clone of Image Sharing Social Media Instagram.
+This project describes my expertise in Django. This is a pure clone of `Image Sharing Social Media Instagram`.
 
 ## Functions
 * Authentication
