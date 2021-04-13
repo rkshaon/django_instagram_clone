@@ -1,6 +1,7 @@
 # Django Instagram Clone
 
-## overview
+## Overview
+This project describes my expertise in Django. This is a pure clone of Image Sharing Social Media Instagram.
 
 ## Functions
 * Authentication
@@ -28,7 +29,9 @@
 * Post Stream of other user who you follow
 * Explore (will be updated soon)
 
-
-## tools
-For theme Bulma `https://bulma.io/`
-For icons `https://material.io/`
+## Tools
+* For theme Bulma `https://bulma.io/`
+* For icons `https://material.io/`
+* For backend `https://www.djangoproject.com/`
+* For automated task `https://docs.celeryproject.org/en/stable/`
+* For frontend `https://api.jquery.com/jquery.ajax/` in showing stories
